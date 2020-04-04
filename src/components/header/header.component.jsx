@@ -30,9 +30,9 @@ const Header = ({ currentUser, hidden, setCurrentUser }) => {
 						SIGN IN
 					</Link>
 				)}
+				{!hidden && <CartDropdown />}
 				<CartIcon />
 			</div>
-			{!hidden && <CartDropdown />}
 		</div>
 	)
 }
