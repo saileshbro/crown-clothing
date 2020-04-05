@@ -1,6 +1,6 @@
 import React from 'react'
 import './shop.styles.scss'
-import CollectionOverview from '../../components/collections-overview/collections-overview.component'
+
 import { Route } from 'react-router-dom'
 import CollectionPage from '../collection/collection.component'
 import {
@@ -9,10 +9,7 @@ import {
 } from '../../firebase/firebase.utils'
 import { connect } from 'react-redux'
 import { updateCollection } from '../../redux/shop/shop.actions'
-import WithSpinner from '../../components/withSpinner/with-spinner.component'
-const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview)
-const CollectionPageWithSpinner = WithSpinner(CollectionPage)
-
+import CollectionsOverview from '../../components/collections-overview/collections-overview.component'
 class ShopPage extends React.Component {
   state = {
     loading: true,
@@ -23,6 +20,7 @@ class ShopPage extends React.Component {
     const collectionRef = firestore.collection('collections')
     collectionRef.onSnapshot(async snapshot => {
       updateCollection(convertCollectionsSnapshotToMap(snapshot))
+      console.log(convertCollectionsSnapshotToMap(snapshot))
       this.setState({ loading: false })
     })
   }
@@ -35,15 +33,14 @@ class ShopPage extends React.Component {
         <Route
           exact
           path={`${match.path}`}
-          render={props => (
-            <CollectionOverviewWithSpinner isLoading={loading} {...props} />
-          )}
+          render={props => {
+            console.log(props)
+            return <CollectionsOverview isLoading={loading} {...props} />
+          }}
         />
         <Route
           path={`${match.path}/:collectionId`}
-          render={props => (
-            <CollectionPageWithSpinner isLoading={loading} {...props} />
-          )}
+          render={props => <CollectionPage isLoading={loading} {...props} />}
         />
       </div>
     )
