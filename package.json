@@ -19,7 +19,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^3.1.0",
     "reselect": "^5.1.1",
-    "styled-components": "^6.3.8"
+    "styled-components": "^6.3.9"
   },
   "scripts": {
     "start": "BROWSER='google-chrome-stable' react-scripts start",
